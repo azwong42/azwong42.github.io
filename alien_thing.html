@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ALIEN THING</title>
+</head>
+<body>
+    <style>
+        body {
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            background-color: black;
+            color: whitesmoke;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            font-family: monospace;
+            display: flex;
+            flex-wrap: wrap;
+            flex-flow: column;
+        }
+
+        h1, h3 {
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+            flex: 0 1 auto;
+        }
+
+        h3 {
+            padding-bottom: 0.4em;
+            border-bottom: 2px solid whitesmoke;
+        }
+
+        .reset {
+            display: none;
+            position: absolute;
+            top: 25px;
+            right: 20px;
+            color: whitesmoke;
+        }
+
+        .console {
+            flex: 1 1 auto;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .console-inner {
+            max-width: 600px;
+        }
+
+        .chunk, .final-chunk {
+            color: black;
+        }
+
+        .chunk div, .final-chunk div {
+            margin-top: 1em;
+        }
+
+        .typed {
+            color: whitesmoke;
+        }
+    </style>
+
+    <div class="content">
+        <h1>ALIEN THING</h1>
+        <h3>(Adeline Wong)</h3>
+        <a class="reset" href="#" onclick="window.location.reload();">Click to restart</a>
+        <div class="console">
+            <div class="console-inner">
+                <div class="chunk">
+                    <div>> look</div>
+                    <div>You are in a room. Before you is an ALIEN THING. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> look alien</div>
+                    <div>You cannot look directly at the ALIEN THING. You think it looks like a human heart. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> talk alien</div>
+                    <div>You ask the ALIEN THING what it is. It replies, "I am an ALIEN THING. You should understand."</div>
+                </div>
+                <div class="chunk">
+                    <div>> understand alien</div>
+                    <div>You cannot understand the ALIEN THING. You think it is important to many people. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> look</div>
+                    <div>You are in a room. Before you is an ALIEN THING. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> go north</div>
+                    <div>You cannot "go" anywhere. You cannot understand the ALIEN THING.</div>
+                </div>
+                <div class="chunk">
+                    <div>> exit</div>
+                    <div>You cannot exit. You cannot understand the ALIEN THING.</div>
+                </div>
+                <div class="chunk">
+                    <div>> understand alien</div>
+                    <div>You cannot understand the ALIEN THING. You think it is a feeling. You think many people experience it. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> feel alien</div>
+                    <div>You cannot feel the ALIEN THING. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> experience alien</div>
+                    <div>You cannot experience the ALIEN THING. You cannot understand it.</div>
+                </div>
+                <div class="chunk">
+                    <div>> understand the FUCKING alien</div>
+                    <div>Oh, please. If you cannot understand the ALIEN THING by now, nothing we can say to you will help you.</div>
+                </div>
+                <div class="chunk">
+                    <div>> exit</div>
+                    <div>You cannot exit. You cannot understand the ALIEN THING.</div>
+                </div>
+                <div class="final-chunk">
+                    <div>> </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        async function typeElementLine(element, isPrompt) {
+            let promptText = element.innerHTML.replace('&gt;', '>');
+            const textLength = promptText.length;
+            for (let i = 0; i < textLength; i++) {
+                if (isPrompt && i === 0) {
+                    promptText = typeNext(2, promptText, isPrompt);
+                    element.innerHTML = promptText;
+                    await blink(3, element, promptText);
+                } else {
+                    promptText = typeNext(1, promptText, isPrompt);
+                    element.innerHTML = promptText;
+                    await new Promise(r => setTimeout(r, isPrompt ? 100 : 30));
+                }
+            }
+            if (isPrompt) {
+                await new Promise(r => setTimeout(r, 100));
+                promptText = promptText.replace('_', '');
+                element.innerHTML = promptText;
+            }
+        }
+
+        async function typeFinalLine(element) {
+            let promptText = element.innerHTML.replace('&gt;', '>');
+            promptText = typeNext(2, promptText, true);
+            element.innerHTML = promptText;
+            while (true) {
+                await blink(1, element, promptText);
+            }
+        }
+
+        function typeNext(n, str, cursor) {
+            const span = (cursor ? '_' : '') + '</span>';
+            const loc = str.search(span);
+            if (loc === -1) {
+                return '<span class="typed">' + str.substring(0, n) + span + str.substring(n);
+            } else {
+                const nextLetterLoc = loc + span.length;
+                return str.substring(0, loc) + str.substring(nextLetterLoc, nextLetterLoc + n) + span + str.substring(nextLetterLoc + n);
+            }
+        }
+
+        async function blink(n, element, str) {
+            const loc = str.search('_');
+            for (let i = 0; i < n; i++) {
+                str = str.replace('_', '');
+                element.innerHTML = str;
+                await new Promise(r => setTimeout(r, 300));
+                str = str.substring(0, loc) + '_' + str.substring(loc);
+                element.innerHTML = str;
+                await new Promise(r => setTimeout(r, 300));
+            }
+        }
+
+        async function setupReset() {
+            await new Promise(r => setTimeout(r, 1800));
+            document.getElementsByClassName('reset')[0].style.display = 'initial';
+        }
+
+        async function run() {
+            const chunks = document.getElementsByClassName('chunk');
+            for (const chunk of chunks) {
+                await typeElementLine(chunk.children[0], true);
+                await typeElementLine(chunk.children[1], false);
+            }
+            setupReset();
+            const finalChunk = document.getElementsByClassName('final-chunk')[0];
+            await typeFinalLine(finalChunk.children[0]);
+        }
+        window.onload = run;
+    </script>
+</body>
+</html>
