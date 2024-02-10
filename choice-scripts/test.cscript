@@ -1,0 +1,100 @@
+{
+    "states": [
+        {
+            "state": "choicesMade"
+        }
+    ],
+    "scenes": [
+        {
+            "id": "intro",
+            "choices": [
+                {
+                    "id": "firstChoice",
+                    "text": "This is a choice.",
+                    "options": [
+                        {
+                            "text": "Make the choice.",
+                            "stateChanges": [
+                                {
+                                    "state": "choicesMade",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        {
+                            "text": "Don't make the choice."
+                        },
+                        {
+                            "text": "Escape.",
+                            "conditions": [
+                                {
+                                    "state": "alwaysFalse"
+                                }
+                            ]
+                        }
+                    ],
+                    "next": [
+                        {
+                            "id": "secondChoice",
+                            "type": "choice"
+                        }
+                    ]
+                },
+                {
+                    "id": "secondChoice",
+                    "text": "This is another choice.",
+                    "options": [
+                        {
+                            "text": "Make the choice.",
+                            "stateChanges": [
+                                {
+                                    "state": "choicesMade",
+                                    "value": 1
+                                }
+                            ]
+                        },
+                        {
+                            "text": "Don't make the choice."
+                        },
+                        {
+                            "text": "Escape.",
+                            "conditions": [
+                                {
+                                    "state": "alwaysFalse"
+                                }
+                            ]
+                        }
+                    ],
+                    "next": [
+                        {
+                            "id": "win",
+                            "type": "scene",
+                            "conditions": [
+                                {
+                                    "state": "choicesMade",
+                                    "value": 1
+                                }
+                            ],
+                            "priority": 1
+                        },
+                        {
+                            "id": "lose",
+                            "type": "scene",
+                            "priority": 0
+                        }
+                    ]
+                }
+            ],
+            "initialChoice": "firstChoice"
+        },
+        {
+            "id": "win",
+            "text": "You win! You made <b>${choicesMade}</b> choices!"
+        },
+        {
+            "id": "lose",
+            "text": "You lose :("
+        }
+    ],
+    "initialScene": "intro"
+}

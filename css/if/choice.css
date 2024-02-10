@@ -1,0 +1,42 @@
+:root {
+    --option-hover: #bbbbbb;
+    --option-disabled: #dddddd;
+    --option-disabled-text: #555555;
+}
+
+.choices-base {
+    margin: auto;
+    max-width: 400px;
+}
+
+.choices-base p {
+
+}
+
+.choices-base ul {
+    padding-left: 0;
+}
+
+.choices-base ul li {
+    list-style-type: none;
+    padding: 0.5em;
+    margin-bottom: 4px;
+    border: 2px solid black;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.choices-base ul li:hover {
+    background-color: var(--option-hover);
+}
+
+.choices-base ul li.disabled {
+    cursor: default;
+    border-color: var(--option-disabled-text);
+    background-color: var(--option-disabled);
+    color: var(--option-disabled-text)
+}
+
+.choices-base ul li:hover {
+    background-color: var(--option-disabled);
+}
