@@ -61,20 +61,20 @@ export function earnAchievement(id) {
 }
 
 export function resetDay() {
-    localStorage.removeItem('inbox');
-    localStorage.removeItem('drafts');
-    localStorage.removeItem('sent');
-    localStorage.removeItem('junk');
-    localStorage.removeItem('todo');
-    localStorage.removeItem('password');
-    localStorage.removeItem('seconds');
-    localStorage.removeItem('sentEmails');
-    localStorage.removeItem('repeatableReceipts');
-    localStorage.removeItem('toReceive');
+    localStorage.setItem('inbox', null);
+    localStorage.setItem('drafts', null);
+    localStorage.setItem('sent', null);
+    localStorage.setItem('junk', null);
+    localStorage.setItem('todo', null);
+    localStorage.setItem('password', null);
+    localStorage.setItem('seconds', '0');
+    localStorage.setItem('sentEmails', '0');
+    localStorage.setItem('repeatableReceipts', '0');
+    localStorage.setItem('toReceive', null);
 }
 
 export function resetAchievements() {
-    localStorage.removeItem('achievements');
+    localStorage.setItem('achievements', null);
 }
 
 export function clearData() {
@@ -83,7 +83,7 @@ export function clearData() {
 
 function loadDataOrDefault(storageItem) {
     const fromStorage = localStorage.getItem(storageItem);
-    if (fromStorage === undefined || fromStorage === null) {
+    if (fromStorage === undefined || fromStorage === null || fromStorage === 'null') {
         return defaultData[storageItem];
     }
     return JSON.parse(fromStorage);

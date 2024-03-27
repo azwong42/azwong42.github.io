@@ -831,9 +831,10 @@
             toggleIdCard();
         }
         const logoutCard = document.getElementById('logout-card');
+        const time = document.getElementById('time').innerText;
         logoutCard.innerHTML =
             '<h2>Congratulations!</h2>' +
-            '<div>You logged out of the account at ' + document.getElementById('time').innerText + ".</div>" +
+            '<div>You logged out of the account at ' + (recursive ?? time) + ".</div>" +
             '<h3>Achievements</h3>' +
             '<div>(Earned achievements are in <i>italics</i>.)</div>';
         const achievementsDiv = document.createElement('div');
@@ -861,7 +862,7 @@
         resetButton.innerText = 'Reset Achievements';
         resetButton.addEventListener('click', function() {
             resetAchievements();
-            logout(true);
+            logout(recursive ?? time);
         })
         buttonDiv.appendChild(resetButton);
         logoutCard.appendChild(buttonDiv);
