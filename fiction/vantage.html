@@ -826,8 +826,8 @@
     }
 
     function logout(recursive) {
+        earnAchievement(0);
         if (!recursive) {
-            earnAchievement(0);
             toggleIdCard();
         }
         const logoutCard = document.getElementById('logout-card');

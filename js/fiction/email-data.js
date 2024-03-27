@@ -1,25 +1,25 @@
 export function getSeconds() {
-    return parseInt(sessionStorage.getItem('seconds') ?? '0');
+    return parseInt(localStorage.getItem('seconds') ?? '0');
 }
 
 export function incrementSeconds() {
-    sessionStorage.setItem('seconds', (getSeconds() + 1).toString());
+    localStorage.setItem('seconds', (getSeconds() + 1).toString());
 }
 
 export function getSentEmails() {
-    return parseInt(sessionStorage.getItem('sentEmails') ?? '0');
+    return parseInt(localStorage.getItem('sentEmails') ?? '0');
 }
 
 export function incrementSentEmails() {
-    sessionStorage.setItem('sentEmails', (getSentEmails() + 1).toString());
+    localStorage.setItem('sentEmails', (getSentEmails() + 1).toString());
 }
 
 export function getRepeatableReceipts() {
-    return parseInt(sessionStorage.getItem('repeatableReceipts') ?? '0');
+    return parseInt(localStorage.getItem('repeatableReceipts') ?? '0');
 }
 
 export function incrementRepeatableReceipts() {
-    sessionStorage.setItem('repeatableReceipts', (getRepeatableReceipts() + 1).toString());
+    localStorage.setItem('repeatableReceipts', (getRepeatableReceipts() + 1).toString());
 }
 
 export function loadEmails(mailbox) {
@@ -27,7 +27,7 @@ export function loadEmails(mailbox) {
 }
 
 export function saveEmails(mailbox, emails) {
-    sessionStorage.setItem(mailbox, JSON.stringify(emails));
+    localStorage.setItem(mailbox, JSON.stringify(emails));
 }
 
 export function loadCalendarEvents() {
@@ -39,15 +39,15 @@ export function loadTodo() {
 }
 
 export function saveTodo(todo) {
-    sessionStorage.setItem('todo', JSON.stringify(todo));
+    localStorage.setItem('todo', JSON.stringify(todo));
 }
 
 export function getAccess() {
-    return sessionStorage.getItem('password') === '06-21-2019';
+    return localStorage.getItem('password') === '06-21-2019';
 }
 
 export function enterPassword(password) {
-    sessionStorage.setItem('password', password);
+    localStorage.setItem('password', password);
 }
 
 export function loadAchievements() {
@@ -57,32 +57,32 @@ export function loadAchievements() {
 export function earnAchievement(id) {
     const achievements = loadAchievements();
     achievements.filter((a) => a.id === id)[0].earned = true;
-    sessionStorage.setItem('achievements', JSON.stringify(achievements));
+    localStorage.setItem('achievements', JSON.stringify(achievements));
 }
 
 export function resetDay() {
-    sessionStorage.removeItem('inbox');
-    sessionStorage.removeItem('drafts');
-    sessionStorage.removeItem('sent');
-    sessionStorage.removeItem('junk');
-    sessionStorage.removeItem('todo');
-    sessionStorage.removeItem('password');
-    sessionStorage.removeItem('seconds');
-    sessionStorage.removeItem('sentEmails');
-    sessionStorage.removeItem('repeatableReceipts');
-    sessionStorage.removeItem('toReceive');
+    localStorage.removeItem('inbox');
+    localStorage.removeItem('drafts');
+    localStorage.removeItem('sent');
+    localStorage.removeItem('junk');
+    localStorage.removeItem('todo');
+    localStorage.removeItem('password');
+    localStorage.removeItem('seconds');
+    localStorage.removeItem('sentEmails');
+    localStorage.removeItem('repeatableReceipts');
+    localStorage.removeItem('toReceive');
 }
 
 export function resetAchievements() {
-    sessionStorage.removeItem('achievements');
+    localStorage.removeItem('achievements');
 }
 
 export function clearData() {
-    sessionStorage.clear();
+    localStorage.clear();
 }
 
 function loadDataOrDefault(storageItem) {
-    const fromStorage = sessionStorage.getItem(storageItem);
+    const fromStorage = localStorage.getItem(storageItem);
     if (fromStorage === undefined || fromStorage === null) {
         return defaultData[storageItem];
     }
