@@ -789,7 +789,7 @@
         const incrementClock = function() {
             incrementSeconds();
             const secondsSinceStart = getSeconds();
-            if (getSeconds() > 7 * 61 && !(loadEmails('toReceive').filter((e) => e.id === 1001)[0].sent)) {
+            if (getSeconds() === 7 * 61 && !(loadEmails('toReceive').filter((e) => e.id === 1001)[0].sent)) {
                 earnAchievement(3);
                 receiveEmail(1002);
             }
