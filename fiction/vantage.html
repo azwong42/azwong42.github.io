@@ -220,7 +220,7 @@
     }
 
     function checkPassword(event) {
-        if (event instanceof PointerEvent || (event instanceof KeyboardEvent && event.key === 'Enter')) {
+        if ((event instanceof MouseEvent && event.button === 0) || (event instanceof KeyboardEvent && event.key === 'Enter')) {
             requirePartialAccess();
             enterPassword(document.getElementById('password-field').value);
             document.getElementById('password-field').value = '';
