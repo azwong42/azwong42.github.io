@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Music</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<style>
+  @font-face {
+    font-family: 'Noto Sans';
+    src: url("fonts/NotoSans-Regular.ttf");
+  }
+
+  body {
+    background-color: black;
+    color: whitesmoke;
+    background-image:
+            radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+            radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+            radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+            radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+  }
+
+  .content {
+    display: block;
+    margin: auto;
+    max-width: 850px;
+    font-family: "Noto Sans";
+  }
+
+  .flavor {
+    text-align: center;
+    width: 80%;
+    margin: auto;
+  }
+
+  .call-in-answer-panel .row {
+    margin: 0 auto 10px;
+    width: 80%;
+    display: block;
+  }
+
+  .call-in-answer-panel .submitter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .call-in-answer-panel .submitter input {
+    width: 40%;
+    margin: 0 10px 0;
+  }
+
+  input[type=text] {
+    background-color: whitesmoke;
+    width: 100%;
+    border-radius: 0;
+    border: 2px solid black;
+    transition: background-color 0.3s;
+    height: 2em;
+    font-family: "Noto Sans";
+    font-size: 1em;
+  }
+
+  input[type=text]:focus {
+    border-radius: 0;
+    border: 2px solid black;
+    background-color: #dddddd;
+  }
+
+  .errorlist {
+    color: black;
+    padding: 10px;
+    border: 3px solid black;
+    list-style-type: none;
+    background-color: #dddddd;
+    text-align: center;
+    width: 75%;
+    display: block;
+    margin: 0 auto 20px;
+  }
+
+  .errorlist li {
+    margin-bottom: 0;
+    list-style-type: none;
+    text-indent: 0;
+    padding-left: 0;
+  }
+
+  .btn {
+    transition: background-color 0.3s;
+    background-color: whitesmoke;
+    border-radius: 0;
+    height: 30px;
+    font-size: 1em;
+    margin-bottom: 0;
+  }
+
+  .btn:hover {
+    background-color: #bbbbbb;
+  }
+
+  a {
+    color: #bbbbbb;
+    display: block;
+    margin: 15px auto;
+    width: fit-content;
+  }
+
+  .audio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .audio-container div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2em;
+  }
+
+  .image-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .image-container img {
+    height: 150px;
+    width: 150px;
+  }
+
+  .emoji-container {
+    font-size: 2em;
+    text-align: center;
+  }
+
+</style>
+<body>
+<div id="content" class="content">
+  <h1 style="text-align: center;">Rock Music</h1>
+  <div class="flavor">
+    <i>
+      Greetings from afar, Ella! I'm so proud of you and your awesome research journey :)
+      <br><br><hr><br>
+      Hello! Oh, who would have guessed that these instrumentalists have such talents? Unfortunately, none of them
+      can remember what lines they played (though they know they were all vocals except one).
+      <br><br>
+      If you can match them
+      back up, you'll learn something you have in common with them (and the stowaway in your bag): You're all...
+    </i>
+  </div>
+  <br><br>
+
+  <form method="post" class="call-in-answer-panel" onsubmit="checkAnswer(); return false;">
+    <ul id="correct-answer-message" class="errorlist nonfield" style="display: none;">
+      <li>TRAVELLARS is correct!</li>
+    </ul>
+    <ul id="incorrect-answer-message" class="errorlist nonfield" style="display: none;">
+      <li>[] is incorrect.</li>
+    </ul>
+    <div class="row">
+      <div class="submitter">
+        <label for="id_answer">Enter a guess:</label>
+        <input type="text" name="answer" autofocus maxlength="500" required id="id_answer">
+        <button class="btn" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+  <br><br>
+  <div class="audio-container">
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-1.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio> (14)
+    </div>
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-2.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio> (3 3 5)
+    </div>
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-3.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio>(11)
+    </div>
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-4.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio> (3 5)
+      </div>
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-5.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio> (6)
+    </div>
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-6.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio> (5 7)
+    </div>
+    <div>
+      <audio controls=""><source src="audio/misc/rock-music-7.mp3" type="audio/mp3">
+        Your browser doesn't support audio. Sorry!
+      </audio> (5)
+    </div>
+  </div>
+  <br><hr><br>
+  <div class="image-container">
+    <div>
+      <img src="images/misc/rock-1.jpg" /> 5
+    </div>
+    <div>
+      <img src="images/misc/rock-2.jpg" /> 3
+    </div>
+    <div>
+      <img src="images/misc/rock-3.jpg" /> 10
+    </div>
+    <div>
+      <img src="images/misc/rock-4.jpg" /> 6
+    </div>
+    <div>
+      <img src="images/misc/rock-5.jpg" /> 4
+    </div>
+    <div>
+      <img src="images/misc/rock-6.jpg" /> 10
+    </div>
+    <div>
+      <img src="images/misc/rock-7.jpg" /> 7
+    </div>
+  </div>
+  <br><hr><br>
+  <div class="emoji-container">
+    🔭🛶⚫🐟🪑🌀🌀⚫🛶🗿
+  </div>
+</div>
+</body>
+
+
+<script type="text/javascript">
+
+  function checkAnswer() {
+    if (document.getElementById("id_answer").value.toUpperCase().replaceAll(" ", "") === "TRAVELLARS") {
+      document.getElementById("correct-answer-message").style.display = "";
+      document.getElementById("incorrect-answer-message").style.display = "none";
+    } else {
+      document.getElementById("correct-answer-message").style.display = "none";
+      document.getElementById("incorrect-answer-message").style.display = "";
+      document.getElementById("incorrect-answer-message").children[0].innerText = document.getElementById("id_answer").value + " is incorrect.";
+    }
+  }
+</script>
+</html>
